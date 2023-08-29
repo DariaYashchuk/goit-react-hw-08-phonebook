@@ -33,10 +33,16 @@ body {
   }
 }
 
+.book {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
 .container {
-  margin: 40px auto 0;
   width: 768px;
   height: 600px;
+
   display: flex;
   font-family: 'Montserrat', sans-serif;
   color: #ffffff;
@@ -51,6 +57,8 @@ body {
 
 .content-wrap {
   background: #a59eba;
+  padding: 15px;
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
@@ -111,7 +119,7 @@ h1 {
 }
 
 .btn-nav {
-  height: 50%;
+  height: 33.33%;
   width: 150px;
 
   display: flex;
@@ -119,7 +127,6 @@ h1 {
   align-items: center;
 
   background-color: #393953;
-  border-right: 1px black solid;
   transition: background-color 250ms linear;
 }
 
@@ -139,6 +146,10 @@ h1 {
 .iconforbutton {
   width: 24px;
   height: 24px;
+}
+
+.logoutbtn {
+  border-radius: 16px;
 }
 
 .title {
@@ -183,4 +194,30 @@ input {
 
   top: 4px;
   left: 4px;
+}
+
+.navigation {
+  height: 33%;
+}
+
+.scaleincenteranimation {
+  animation: scale-in-center 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.message {
+  animation: scale-in-center 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation-delay: 1.4s;
+}
+
+@keyframes scale-in-center {
+  0% {
+    filter: blur(12px);
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    filter: blur(0);
+  }
 }

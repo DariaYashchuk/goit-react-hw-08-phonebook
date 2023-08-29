@@ -2,7 +2,7 @@ import React from 'react';
 import { AiOutlineUserDelete } from 'react-icons/ai';
 import css from './ContactList.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
+import { deleteContact } from 'redux/contacts/operations';
 import {
   getContacts,
   getError,
@@ -17,8 +17,8 @@ import { RotatingLines } from 'react-loader-spinner';
 const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-
   const isLoading = useSelector(getIsLoading);
+
   const error = useSelector(getError);
 
   const filter = useSelector(filterSelector);
@@ -52,11 +52,11 @@ const ContactList = () => {
       <div className={css.contactswrapper}>
         <Filter />
         <ul className={css.contactslist}>
-          {visibleContacts.map(({ id, name, phone }) => (
+          {visibleContacts.map(({ id, name, number }) => (
             <li key={id} className={css.contactitem}>
               <p className={css.contactinfo}>
                 <AiOutlineUserDelete className={css.usericon} />
-                {name}: {phone}
+                {name}: {number}
               </p>
               <button
                 className={clsx('button-common button-main', css.deletebutton)}

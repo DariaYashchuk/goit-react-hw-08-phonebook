@@ -7,19 +7,23 @@ import { useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/contacts/operations';
 import { getContacts, getIsLoading } from 'redux/contacts/contactsSelector';
+import { Link } from 'react-router-dom';
+import { useAuth } from 'hooks';
+import { toast } from 'react-hot-toast';
 
 const ContactForm = () => {
   const contacts = useSelector(getContacts);
   const isLoading = useSelector(getIsLoading);
+  const { isLoggedIn } = useAuth();
   const dispatch = useDispatch();
 
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [number, setNumber] = useState('');
 
   const nameInputId = nanoid();
-  const phoneInputId = nanoid();
+  const numberInputId = nanoid();
 
   const handleChange = e => {
     const { name, value } = e.currentTarget;
@@ -27,8 +31,8 @@ const ContactForm = () => {
       case 'name':
         setName(value);
         break;
-      case 'phone':
-        setPhone(value);
+      case 'number':
+        setNumber(value);
         break;
 
       default:
@@ -39,7 +43,7 @@ const ContactForm = () => {
 
   const reset = () => {
     setName('');
-    setPhone('');
+    setNumber('');
   };
 
   const onSubmitClick = e => {
@@ -47,16 +51,22 @@ const ContactForm = () => {
 
     const contact = {
       name,
-      phone,
+      number,
     };
 
     const isNameIncluded = contacts.some(
       value => value.name.toLowerCase() === contact.name.toLowerCase()
     );
-    isNameIncluded
-      ? alert(`${name} is already in contacts`)
-      : dispatch(addContact(contact));
 
+    if (isNameIncluded) {
+      toast.error(`${name} is already in contacts`);
+      reset();
+
+      return;
+    } else {
+      dispatch(addContact(contact));
+      toast.success(`${name} was successfully added`);
+    }
     reset();
   };
 
@@ -91,27 +101,46 @@ const ContactForm = () => {
           />
         </label>
         <label
-          htmlFor={phoneInputId}
+          htmlFor={numberInputId}
           className={clsx(css.inputs, css.numberinput)}
         >
           <p className="text">Number</p>
           <input
-            id={phoneInputId}
+            id={numberInputId}
             type="tel"
-            name="phone"
+            name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            value={phone}
+            value={number}
             onChange={handleChange}
             required
           />
         </label>
         <button
           type="submit"
-          className={clsx('button-common button-main', css.buttonadd)}
+          className={clsx(
+            'button-common button-main scaleincenteranimation',
+            css.buttonadd
+          )}
+          disabled={!isLoggedIn ? true : false}
         >
           {buttonContent}
         </button>
+
+        {!isLoggedIn && (
+          <p className="message">
+            {' '}
+            Please{' '}
+            <Link to="/login" className={css.messagelink}>
+              Log In
+            </Link>{' '}
+            or{' '}
+            <Link to="/register" className={css.messagelink}>
+              Create
+            </Link>{' '}
+            an account
+          </p>
+        )}
       </div>
     </form>
   );

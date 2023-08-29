@@ -1,0 +1,25 @@
+.username {
+  overflow-wrap: break-word;
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: center;
+
+  color: #fff;
+}
+.userwrapp {
+  display: flex;
+  flex-direction: column;
+  padding: 0 8px;
+  box-sizing: border-box;
+}
+
+.avatar {
+  width: 100%;
+}
+.avatarwrapp {
+  width: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+
+  margin-bottom: 8px;
+}

@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "https://DariaYashchuk.github.io/goit-react-hw-08-phonebook/",
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.7",
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
@@ -13,6 +16,8 @@
     "nanoid": "^4.0.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0",
+    "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
     "react-loader-spinner": "^5.3.4",
     "react-redux": "^8.1.2",
