@@ -1,0 +1,25 @@
+.contactinfo {
+  margin-right: 8px;
+}
+
+.deletebutton {
+  margin-left: auto;
+}
+
+.deletebutton:disabled {
+  background-color: #4f4c64;
+  cursor: not-allowed;
+}
+
+.usericon {
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+
+  display: block;
+}
+
+.deleteicon {
+  width: 16px;
+  height: 16px;
+}
